@@ -1,7 +1,10 @@
 Week 2 Project: Semantic HTML and CSS Website
 
 Description
-This project is a simple, responsive webpage built using semantic HTML and CSS. It demonstrates the use of proper HTML structure with elements like <header>, <nav>, <main>, <section>, and <footer>, along with CSS for styling, layout, and responsiveness. The site includes three main sections: Home, About, and Contact, with a navigation menu and a contact form.
+This project is a simple, responsive webpage built using semantic HTML and CSS. It demonstrates the use of proper HTML structure with elements 
+like <header>, <nav>, <main>, <section>, and <footer>, 
+along with CSS for styling, layout, and responsiveness. 
+The site includes three main sections: Home, About, and Contact, with a navigation menu and a contact form.
 
 Features
 
