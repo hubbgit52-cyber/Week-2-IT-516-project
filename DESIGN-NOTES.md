@@ -1,4 +1,4 @@
-# Week 3: Interactive Features
+# Week 3 IT516: Interactive Features
 
 ## Feature 1: Theme Toggle
 - What it does: Allows the user to switch between light mode and dark mode and remembers the choice using localStorage.
