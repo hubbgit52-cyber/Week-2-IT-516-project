@@ -30,7 +30,7 @@ RootLayout (Server)
 └── Footer (Server)
 ```
 
-## Week 6: Async Data Fetch (This week's assignment)
+## Week 7: Async Data Fetch (This week's assignment)
 
 - Data source chosen: Open-Meteo (no API key required).
 - Endpoint used for demo: `https://api.open-meteo.com/v1/forecast?latitude=51.5074&longitude=-0.1278&current_weather=true`
