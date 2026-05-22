@@ -189,6 +189,7 @@ button[type="submit"] {
   border-radius: 10px;
   cursor: pointer;
   font: inherit;
+  transition: background 160ms ease, opacity 160ms ease;
 }
 
 button:hover,
@@ -198,6 +199,13 @@ button[type="submit"]:focus-visible {
   background: #3f8f3f;
   outline: 2px solid #ffffff;
   outline-offset: 2px;
+}
+
+button:disabled,
+button[type="submit"]:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: var(--primary);
 }
 
 .error-message,
@@ -241,4 +249,45 @@ button[type="submit"]:focus-visible {
   .page-content {
     padding: 20px;
   }
+}
+
+/* Async component skeleton styles */
+.skeleton {
+  display: block;
+  gap: 10px;
+}
+.skeleton-line {
+  height: 16px;
+  border-radius: 8px;
+  background: linear-gradient(90deg, var(--border), #efefef, var(--border));
+  background-size: 200% 100%;
+  animation: pulse 1.6s infinite linear;
+}
+.skeleton-line.long { width: 80%; height: 20px; }
+.skeleton-line.medium { width: 60%; }
+.skeleton-line.short { width: 35%; }
+
+@keyframes pulse {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Respect user's reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .skeleton-line {
+    animation: none;
+  }
+}
+
+.weather-panel pre {
+  background: rgba(0,0,0,0.03);
+  padding: 12px;
+  border-radius: 10px;
+  overflow: auto;
 }

@@ -30,6 +30,14 @@ RootLayout (Server)
 └── Footer (Server)
 ```
 
+## Week 6: Async Data Fetch (This week's assignment)
+
+- Data source chosen: Open-Meteo (no API key required).
+- Endpoint used for demo: `https://api.open-meteo.com/v1/forecast?latitude=51.5074&longitude=-0.1278&current_weather=true`
+- Why Open-Meteo: no auth keys, minimal CORS friction, returns simple current weather payload useful for a concise UI demo.
+- Notes: Implement a client component that fetches `current_weather`, shows a skeleton while loading, displays an accessible error state, and a refresh control to re-fetch. Respect `prefers-reduced-motion` for skeleton animations.
+
+
 ## Components Planned
 - **Header**: Client component (needs ThemeToggle with state). Receives no props, holds theme state.
 - **Nav**: Server component. Receives no props, renders navigation links.

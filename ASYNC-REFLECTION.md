@@ -1,0 +1,9 @@
+Asynchronous fetching reshaped how I think about UI state and user experience. Building a single, focused component that requests current weather from Open-Meteo forced me to explicitly model the three core states—loading, error, and success—and to design the UX for each. The skeleton screen reduces perceived latency by giving users an immediate visual structure while the network request completes; pairing that skeleton with a clear, accessible error message and a retry control ensures the UI remains useful even when the network fails. Implementing the fetch with async/await made the data flow straightforward: the linear style of async functions maps directly to the sequence of steps I want the UI to represent (start request → handle response → render), which simplified error propagation and cleanup logic.
+
+An important accessibility consideration was respecting `prefers-reduced-motion`. The skeleton uses a subtle pulsing animation by default but disables animations when the user preference requests reduced motion. This small detail prevents discomfort for some users while preserving the helpful affordance for others. I also added `aria-live="polite"` and role-based alerts so screen reader users receive status updates without being overwhelmed.
+
+The exercise reinforced that asynchronous programming is as much about UX as it is about code. The technical pattern—fetch with abort handling, clear state transitions, and a refresh control—combined with small accessibility and performance choices yields a resilient, user-friendly component. Going forward, I’ll continue to treat networked UI elements as state machines and ensure graceful degradation when remote data is unavailable.
+
+References
+
+Mozilla Developer Network. (n.d.). async function. MDN Web Docs. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function
