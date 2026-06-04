@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from 'react';
+import { createMessage } from '../app/actions';
 
 function validateEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -10,20 +11,18 @@ export default function ContactForm() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    message: ''
+    body: ''
   });
   const [errors, setErrors] = useState({
     name: '',
     email: '',
-    message: ''
+    body: ''
   });
-  const [status, setStatus] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
 
-    // Clear error on input
     if (errors[name as keyof typeof errors]) {
       setErrors(prev => ({ ...prev, [name]: '' }));
     }
@@ -41,39 +40,15 @@ export default function ContactForm() {
       } else if (!validateEmail(value)) {
         error = 'Please enter a valid email address.';
       }
-    } else if (field === 'message' && !value.trim()) {
+    } else if (field === 'body' && !value.trim()) {
       error = 'Please enter a message.';
     }
 
     setErrors(prev => ({ ...prev, [field]: error }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setStatus('');
-
-    // Validate all fields
-    const newErrors = {
-      name: !formData.name.trim() ? 'Name is required.' : '',
-      email: !formData.email.trim() ? 'Email is required.' : (!validateEmail(formData.email) ? 'Please enter a valid email address.' : ''),
-      message: !formData.message.trim() ? 'Please enter a message.' : ''
-    };
-
-    setErrors(newErrors);
-
-    const hasErrors = Object.values(newErrors).some(error => error);
-    if (hasErrors) {
-      setStatus('Please fix the errors above before sending.');
-      return;
-    }
-
-    setStatus('Thank you! Your message has been received.');
-    setFormData({ name: '', email: '', message: '' });
-    setErrors({ name: '', email: '', message: '' });
-  };
-
   return (
-    <form onSubmit={handleSubmit} noValidate>
+    <form action={createMessage}>
       <div className="form-field">
         <label htmlFor="name">Name</label>
         <input
@@ -105,22 +80,21 @@ export default function ContactForm() {
       </div>
 
       <div className="form-field">
-        <label htmlFor="message">Message</label>
+        <label htmlFor="body">Message</label>
         <textarea
-          id="message"
-          name="message"
+          id="body"
+          name="body"
           rows={5}
-          value={formData.message}
+          value={formData.body}
           onChange={handleChange}
-          onBlur={() => handleBlur('message')}
+          onBlur={() => handleBlur('body')}
           required
-          aria-describedby="message-error"
+          aria-describedby="body-error"
         />
-        <span id="message-error" className="error-message" role="alert">{errors.message}</span>
+        <span id="body-error" className="error-message" role="alert">{errors.body}</span>
       </div>
 
       <button type="submit">Send Message</button>
-      <div className="form-status" aria-live="polite">{status}</div>
     </form>
   );
 }
