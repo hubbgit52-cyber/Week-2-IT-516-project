@@ -49,3 +49,52 @@ RootLayout (Server)
 
 Client components are marked with "use client" only where needed for interactivity.
 ```
+
+**Week 8: Database & Backend**
+
+**Schema definition (Prisma / PostgreSQL)**
+
+Generator and datasource (Prisma):
+
+```prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int       @id @default(autoincrement())
+  email     String    @unique
+  name      String?
+  messages  Message[]
+  contacts  Contact[]
+  createdAt DateTime  @default(now())
+}
+
+model Message {
+  id        Int      @id @default(autoincrement())
+  content   String
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+}
+
+model Contact {
+  id     Int     @id @default(autoincrement())
+  name   String
+  email  String?
+  phone  String?
+  user   User?   @relation(fields: [userId], references: [id])
+  userId Int?
+}
+```
+
+Rationale: I selected PostgreSQL as the production datastore and Prisma as the ORM/DB toolkit. PostgreSQL provides ACID guarantees, strong relational features (joins, constraints, transactions), and robust community support — a good fit for structured data like users, messages, and contacts where consistency matters. Prisma offers a concise schema-first workflow, type-safe client code, and smooth developer ergonomics that speed implementation and reduce runtime errors.
+
+Provider chosen and why:
+- Provider: PostgreSQL (hosted on a managed provider such as Supabase, Neon, or Heroku Postgres).
+- Why: mature relational model, strong tooling, proven scalability for web apps, and first-class support in Prisma via the `postgresql` provider. Managed Postgres options simplify backups, connection pooling, and security.

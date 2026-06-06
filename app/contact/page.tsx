@@ -1,4 +1,5 @@
 import ContactForm from '../../components/ContactForm';
+import Link from 'next/link';
 
 export default function ContactPage() {
   return (
@@ -15,6 +16,12 @@ export default function ContactPage() {
       <div className="form-card">
         <h3>Send a message</h3>
         <ContactForm />
+      </div>
+
+      <div className="form-actions">
+        <Link href="/messages">
+          <button type="button" className="btn">View Messages</button>
+        </Link>
       </div>
     </section>
   );

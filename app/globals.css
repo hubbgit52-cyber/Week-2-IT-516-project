@@ -155,6 +155,28 @@ main {
   padding: 24px;
 }
 
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.form-actions .btn {
+  appearance: none;
+  border: none;
+  background: var(--primary);
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  font: inherit;
+}
+
+@media (max-width: 768px) {
+  .form-actions { justify-content: center; }
+}
+
 .form-field {
   margin-bottom: 18px;
 }
