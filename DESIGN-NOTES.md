@@ -98,3 +98,17 @@ Rationale: I selected PostgreSQL as the production datastore and Prisma as the O
 Provider chosen and why:
 - Provider: PostgreSQL (hosted on a managed provider such as Supabase, Neon, or Heroku Postgres).
 - Why: mature relational model, strong tooling, proven scalability for web apps, and first-class support in Prisma via the `postgresql` provider. Managed Postgres options simplify backups, connection pooling, and security.
+
+## Week 9: Authentication (Auth.js)
+
+- Installed Auth.js (NextAuth v5 beta): `npm install next-auth@beta`.
+- Created `auth.ts` at project root using the GitHub provider and exported the handlers and helpers:
+  - `export const { handlers, auth, signIn, signOut } = NextAuth({ providers: [GitHub], session: { strategy: 'jwt', maxAge: 60 * 60 * 24 } });`
+- Added the Next.js API route `app/api/auth/[...nextauth]/route.ts` that forwards requests: `export { GET, POST } from "@/auth";`.
+- Implemented a server-side sign-in/sign-out button using `auth()`, `signIn`, and `signOut` (rendered from the root layout so it remains a server component and does not force client bundles).
+- Protected the `messages` page on the server by calling `const session = await auth()` and redirecting unauthenticated users to `/api/auth/signin`.
+- Environment variables: set `AUTH_SECRET`, `AUTH_GITHUB_ID`, and `AUTH_GITHUB_SECRET` in `.env.local`. Generate a strong `AUTH_SECRET` with `npx auth secret` and keep secrets out of version control.
+
+Notes:
+- Server-side `auth()` provides session data at render time without client JS, which enables secure route protection.
+- Keep OAuth callback URLs and environment variables configured in the Vercel project for the production deployment.

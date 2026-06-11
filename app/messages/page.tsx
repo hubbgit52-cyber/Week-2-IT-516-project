@@ -1,12 +1,17 @@
 export const dynamic = 'force-dynamic';
 
 import { prisma } from '../../lib/prisma';
+import { auth } from '@/auth';
+import { redirect } from 'next/navigation';
 
 export const metadata = {
   title: 'Messages',
 };
 
 export default async function MessagesPage() {
+  const session = await auth();
+  if (!session?.user) redirect('/api/auth/signin');
+
   const messages = await prisma.message.findMany({
     orderBy: { createdAt: 'desc' },
     take: 20,
