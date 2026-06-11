@@ -1,7 +1,7 @@
 export const dynamic = 'force-dynamic';
 
 import { prisma } from '../../lib/prisma';
-import { auth } from '@/auth';
+import { auth } from '../../auth';
 import { redirect } from 'next/navigation';
 
 export const metadata = {

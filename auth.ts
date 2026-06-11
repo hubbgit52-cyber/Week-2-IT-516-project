@@ -8,3 +8,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 });
 
 export default handlers;
+
+// Re-export HTTP method handlers for Next.js route forwarding
+export const GET = handlers.GET;
+export const POST = handlers.POST;
