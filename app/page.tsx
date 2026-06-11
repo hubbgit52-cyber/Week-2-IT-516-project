@@ -3,19 +3,28 @@ import Card from '../components/Card';
 
 const features = [
   {
-    title: 'Theme Toggle',
-    description: 'Switch between light and dark modes with persistent preferences.',
-    href: '#theme'
+    title: 'Custom Web Applications',
+    description: 'Bespoke web apps built with modern frameworks to scale with your business.',
+    href: '/services#web',
+    image: '/web.svg'
   },
   {
-    title: 'Contact Form',
-    description: 'Interactive form with validation and success feedback.',
-    href: '/contact'
+    title: 'Cloud Architecture & DevOps',
+    description: 'Resilient cloud infrastructure, CI/CD pipelines, and cost-optimised deployments.',
+    href: '/services#cloud',
+    image: '/cloud.svg'
   },
   {
-    title: 'Component Architecture',
-    description: 'Built with reusable React components and hooks.',
-    href: '#components'
+    title: 'Product Design & UX',
+    description: 'User-centred design, prototyping, and polished UI that converts.',
+    href: '/services#design',
+    image: '/design.svg'
+  },
+  {
+    title: 'Data Engineering & ML',
+    description: 'Data pipelines, analytics, and machine learning to unlock business insights.',
+    href: '/services#data',
+    image: '/data.svg'
   }
 ];
 
@@ -23,17 +32,20 @@ export default function HomePage() {
   return (
     <>
       <Hero
-        title="Home"
-        description="Welcome to the Project Website. This homepage demonstrates React component architecture with reusable Hero and Card components."
+        title="Acme Studios"
+        description="Welcome to the Acme Software Studio Website. We build reliable, scalable web applications for startups and enterprises."
       />
-      {features.map((feature, index) => (
-        <Card
-          key={index}
-          title={feature.title}
-          description={feature.description}
-          href={feature.href}
-        />
-      ))}
+      <div className="features-grid">
+        {features.map((feature, index) => (
+          <Card
+            key={index}
+            title={feature.title}
+            description={feature.description}
+            href={feature.href}
+            image={feature.image}
+          />
+        ))}
+      </div>
     </>
   );
 }

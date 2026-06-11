@@ -4,8 +4,8 @@ import AuthButtonServer from '../components/AuthButtonServer';
 import Footer from '../components/Footer';
 
 export const metadata = {
-  title: 'Project Website',
-  description: 'A Week 4 React component architecture project.',
+  title: 'Acme Software Studio',
+  description: 'Acme Software Studio - Project Website',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -13,10 +13,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body>
         <div className="site-shell">
-          <Header />
-          <div className="header-auth">{/* server component */}
-            <AuthButtonServer />
-          </div>
+          <Header authButton={<AuthButtonServer />} />
           <main>{children}</main>
           <Footer />
         </div>

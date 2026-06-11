@@ -10,7 +10,7 @@ function prefersDark() {
   return window.matchMedia('(prefers-color-scheme: dark)').matches;
 }
 
-export default function Header() {
+export default function Header({ authButton }: { authButton?: React.ReactNode }) {
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
 
   useEffect(() => {
@@ -26,14 +26,18 @@ export default function Header() {
   }, [theme]);
 
   const toggleTheme = () => {
-    setTheme(prev => prev === 'light' ? 'dark' : 'light');
+    setTheme(prev => {
+      const next = prev === 'light' ? 'dark' : 'light';
+      console.log('toggleTheme clicked —', { prev, next });
+      return next;
+    });
   };
 
   return (
     <header className="site-header">
       <div>
-        <h1>Project Website</h1>
-        <p>Week 4 project: React component architecture with hooks.</p>
+        <h2>Acme Software Studio</h2>
+        
       </div>
       <div className="header-controls">
         <button
@@ -44,6 +48,7 @@ export default function Header() {
         >
           Switch to {theme === 'dark' ? 'Light' : 'Dark'} Mode
         </button>
+        {authButton}
       </div>
       <Nav />
     </header>

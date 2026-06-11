@@ -5,9 +5,12 @@ type HeroProps = {
 
 export default function Hero({ title, description }: HeroProps) {
   return (
-    <section className="page-content">
-      <h2>{title}</h2>
-      <p>{description}</p>
+    <section className="hero page-content">
+      <div className="hero-overlay" />
+      <div className="hero-content">
+        <h2>{title}</h2>
+        <h3>{description}</h3>
+      </div>
     </section>
   );
 }
