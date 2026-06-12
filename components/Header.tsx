@@ -36,22 +36,26 @@ export default function Header({ authButton }: { authButton?: React.ReactNode })
   return (
     <header className="site-header full-bleed">
       <div className="site-shell-inner">
-        <div>
-          <h2>Acme Software Studio</h2>
+        <div className="brand">
+          <h1>Acme</h1>
         </div>
+
+        <Nav />
+
         <div className="header-controls">
-          <button
-            type="button"
-            className="toggle-button"
+          <div
+            role="button"
+            className="toggle"
+            data-on={theme === 'dark' ? 'true' : 'false'}
             onClick={toggleTheme}
             aria-pressed={theme === 'dark'}
+            aria-label="Toggle theme"
           >
-            Switch to {theme === 'dark' ? 'Light' : 'Dark'} Mode
-          </button>
+            <div className="knob" />
+          </div>
           {authButton}
         </div>
       </div>
-      <Nav />
     </header>
   );
 }
