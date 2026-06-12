@@ -1,8 +1,8 @@
-import { auth, signOut } from '../auth';
+import { auth, signIn, signOut } from '../auth';
 
 export default async function AuthButtonServer() {
   const session = await auth();
-  const callbackUrl = process.env.NEXTAUTH_URL || '/';
+  const callbackUrl = process.env.NEXTAUTH_URL || 'http://localhost:3000/';
 
   if (session?.user) {
     return (
@@ -20,11 +20,16 @@ export default async function AuthButtonServer() {
     );
   }
 
-  const signInHref = `/api/auth/signin/github?callbackUrl=${encodeURIComponent(callbackUrl)}`;
-
   return (
     <div>
-      <a href={signInHref} className="btn">Sign in with GitHub</a>
+      <form
+        action={async () => {
+          'use server';
+          await signIn('github', { redirectTo: callbackUrl });
+        }}
+      >
+        <button type="submit" className="btn">Sign in with GitHub</button>
+      </form>
     </div>
   );
 }
