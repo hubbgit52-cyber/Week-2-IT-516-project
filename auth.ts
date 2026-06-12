@@ -15,9 +15,4 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {},
 });
-
-export default handlers;
-
-// Re-export HTTP method handlers for Next.js route forwarding
-export const GET = handlers.GET;
-export const POST = handlers.POST;
+// Note: do not export default; handlers is exported as a named export.

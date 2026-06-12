@@ -1,15 +1,21 @@
-import { auth } from '../auth';
+import { auth, signOut } from '../auth';
 
 export default async function AuthButtonServer() {
   const session = await auth();
   const callbackUrl = process.env.NEXTAUTH_URL || '/';
 
   if (session?.user) {
-    const signOutHref = `/api/auth/signout?callbackUrl=${encodeURIComponent(callbackUrl)}`;
     return (
-      <div>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
         <span>Hi, {session.user.name}</span>
-        <a href={signOutHref} className="btn" style={{ marginLeft: 12 }}>Sign out</a>
+        <form
+          action={async () => {
+            'use server';
+            await signOut({ redirectTo: callbackUrl });
+          }}
+        >
+          <button type="submit" className="btn" style={{ marginLeft: 12 }}>Sign out</button>
+        </form>
       </div>
     );
   }
