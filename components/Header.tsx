@@ -49,7 +49,7 @@ export default function Header({ authButton }: { authButton?: React.ReactNode })
             data-on={theme === 'dark' ? 'true' : 'false'}
             onClick={toggleTheme}
             aria-pressed={theme === 'dark'}
-            aria-label="Toggle theme"
+            aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
           >
             <div className="knob" />
           </div>
