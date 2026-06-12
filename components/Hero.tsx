@@ -5,11 +5,13 @@ type HeroProps = {
 
 export default function Hero({ title, description }: HeroProps) {
   return (
-    <section className="hero page-content">
+    <section className="hero page-content full-bleed">
       <div className="hero-overlay" />
-      <div className="hero-content">
-        <h2>{title}</h2>
-        <h3>{description}</h3>
+      <div className="site-shell-inner">
+        <div className="hero-content">
+          <h2>{title}</h2>
+          <h3>{description}</h3>
+        </div>
       </div>
     </section>
   );

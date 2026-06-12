@@ -2,6 +2,7 @@ import './globals.css';
 import Header from '../components/Header';
 import AuthButtonServer from '../components/AuthButtonServer';
 import Footer from '../components/Footer';
+import { Analytics } from "@vercel/analytics/next"
 
 export const metadata = {
   title: 'Acme Software Studio',

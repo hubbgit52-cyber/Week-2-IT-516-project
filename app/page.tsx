@@ -1,5 +1,7 @@
 import Hero from '../components/Hero';
 import Card from '../components/Card';
+import Testimonial from '../components/Testimonial';
+import Testimonials from '../components/Testimonials';
 
 const features = [
   {
@@ -46,6 +48,28 @@ export default function HomePage() {
           />
         ))}
       </div>
+
+      <section className="testimonials-section">
+        <h2>What our clients say</h2>
+        <div className="testimonials-grid">
+          <Testimonial
+            quote="Acme Studios transformed our product in weeks—clean code, thoughtful UX, and zero deployment headaches."
+            name="Emily Carter"
+            title="VP Product, BrightLeaf"
+          />
+          <Testimonial
+            quote="The team handled a complex migration flawlessly and improved our CI/CD pipeline—reliable and responsive partners."
+            name="Michael Thompson"
+            title="CTO, NovaMetrics"
+          />
+          <Testimonial
+            quote="Design and execution were top-notch. Our conversion rates improved within the first month. Highly recommended."
+            name="Samantha Reed"
+            title="Founder, LumenCo"
+          />
+        </div>
+      </section>
+      <Testimonials />
     </>
   );
 }

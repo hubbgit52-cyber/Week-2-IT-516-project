@@ -34,21 +34,22 @@ export default function Header({ authButton }: { authButton?: React.ReactNode })
   };
 
   return (
-    <header className="site-header">
-      <div>
-        <h2>Acme Software Studio</h2>
-        
-      </div>
-      <div className="header-controls">
-        <button
-          type="button"
-          className="toggle-button"
-          onClick={toggleTheme}
-          aria-pressed={theme === 'dark'}
-        >
-          Switch to {theme === 'dark' ? 'Light' : 'Dark'} Mode
-        </button>
-        {authButton}
+    <header className="site-header full-bleed">
+      <div className="site-shell-inner">
+        <div>
+          <h2>Acme Software Studio</h2>
+        </div>
+        <div className="header-controls">
+          <button
+            type="button"
+            className="toggle-button"
+            onClick={toggleTheme}
+            aria-pressed={theme === 'dark'}
+          >
+            Switch to {theme === 'dark' ? 'Light' : 'Dark'} Mode
+          </button>
+          {authButton}
+        </div>
       </div>
       <Nav />
     </header>
