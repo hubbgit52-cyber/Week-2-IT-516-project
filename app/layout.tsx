@@ -1,6 +1,6 @@
 import './globals.css';
 import Header from '../components/Header';
-import AuthButtonAction from '../components/AuthButtonAction';
+import AuthButtonServer from '../components/AuthButtonServer';
 import Footer from '../components/Footer';
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -15,7 +15,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body>
         <div className="site-shell">
-          <Header authButton={<AuthButtonAction />} />
+          <Header authButton={<AuthButtonServer />} />
           <main>{children}</main>
           <Footer />
           <Analytics />
