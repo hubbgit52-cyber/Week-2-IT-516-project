@@ -16,15 +16,15 @@ export async function POST(request: Request) {
     let body = '';
 
     if (contentType.includes('application/json')) {
-      let json = {};
+      let json: any = {};
       try {
         json = raw ? JSON.parse(raw) : {};
       } catch (err) {
         console.error('API /api/messages JSON parse error:', err);
       }
-      name = String(json.name ?? '');
-      email = String(json.email ?? '');
-      body = String(json.body ?? '');
+      name = String((json && json.name) ?? '');
+      email = String((json && json.email) ?? '');
+      body = String((json && json.body) ?? '');
     } else {
       const formData = await request.formData();
       name = String(formData.get('name') ?? '');
