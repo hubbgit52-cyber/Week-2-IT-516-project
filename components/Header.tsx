@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Nav from './Nav';
+import { signIn } from 'next-auth/react';
 
 const THEME_KEY = 'project-theme-mode';
 
@@ -54,6 +55,11 @@ export default function Header({ authButton }: { authButton?: React.ReactNode })
             <div className="knob" />
           </div>
           {authButton}
+          {!authButton && (
+            <button className="btn" onClick={() => signIn('github', { callbackUrl: '/' })}>
+              Sign in with GitHub
+            </button>
+          )}
         </div>
       </div>
     </header>
