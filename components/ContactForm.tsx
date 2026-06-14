@@ -1,13 +1,14 @@
 "use client";
 
 import { useState } from 'react';
-import { createMessage } from '../app/actions';
 
 function validateEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
 export default function ContactForm() {
+  const [submitting, setSubmitting] = useState(false);
+  const [success, setSuccess] = useState('');
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -27,6 +28,47 @@ export default function ContactForm() {
       setErrors(prev => ({ ...prev, [name]: '' }));
     }
   };
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setSuccess('');
+
+    // Client-side validation
+    if (!formData.name.trim() || !formData.email.trim() || !formData.body.trim()) {
+      setErrors(prev => ({
+        name: !formData.name.trim() ? 'Name is required.' : prev.name,
+        email: !formData.email.trim() ? 'Email is required.' : prev.email,
+        body: !formData.body.trim() ? 'Please enter a message.' : prev.body,
+      }));
+      return;
+    }
+
+    if (!validateEmail(formData.email)) {
+      setErrors(prev => ({ ...prev, email: 'Please enter a valid email address.' }));
+      return;
+    }
+
+    setSubmitting(true);
+    try {
+      const res = await fetch('/api/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      if (!res.ok) {
+        const payload = await res.json().catch(() => ({}));
+        throw new Error(payload?.error || 'Submission failed');
+      }
+
+      setSuccess('Message sent — thank you!');
+      setFormData({ name: '', email: '', body: '' });
+    } catch (err: any) {
+      setErrors(prev => ({ ...prev, body: err.message || 'Submission failed' }));
+    } finally {
+      setSubmitting(false);
+    }
+  }
 
   const handleBlur = (field: string) => {
     const value = formData[field as keyof typeof formData];
@@ -48,7 +90,7 @@ export default function ContactForm() {
   };
 
   return (
-    <form action={createMessage}>
+    <form onSubmit={handleSubmit}>
       <div className="form-field">
         <label htmlFor="name">Name</label>
         <input

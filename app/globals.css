@@ -558,8 +558,7 @@ body.dark-mode .success-message {
   position: relative;
   padding: 48px 28px;
   color: #ffffff;
-  /* Local fallback image in public/hero.png  */
-  background-image: url('/hero.png');
+  /* Hero image moved into HTML for LCP optimization (use next/image) */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -575,6 +574,17 @@ body.dark-mode .success-message {
   inset: 0;
   background: rgba(0,0,0,0.35);
   pointer-events: none;
+}
+
+/* absolutely-positioned image container used by next/image fill */
+.hero .hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero .hero-bg img {
+  object-fit: cover;
 }
 
 .hero .hero-content {
