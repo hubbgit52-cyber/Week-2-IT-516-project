@@ -3,6 +3,7 @@ export const dynamic = 'force-dynamic';
 import { prisma } from '../../lib/prisma';
 import { auth } from '../../auth';
 import { redirect } from 'next/navigation';
+import SignOutButton from '../../components/SignOutButton';
 
 export const metadata = {
   title: 'Messages',
@@ -20,7 +21,10 @@ export default async function MessagesPage() {
   return (
     <main className="site-shell">
       <div className="page-content">
-        <h1>Messages</h1>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <h1>Messages</h1>
+          <SignOutButton />
+        </div>
         <p>Latest messages submitted through the contact form.</p>
         <ul className="message-list">
           {messages.map((message) => (
